@@ -4,6 +4,9 @@ const API_KEY = process.env.API_KEY;
 
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    BASE_URL: process.env.BASE_URL,
+  },
   async redirects() {
     return [
       {
