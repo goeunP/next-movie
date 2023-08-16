@@ -4,7 +4,7 @@ export default function about() {
   return (
     <>
       <Seo title="About" />
-      <h1>About</h1>
+      <h4 className="font-medium pt-3">about</h4>
     </>
   );
 }

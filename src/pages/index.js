@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Seo from "@/components/Seo";
 
 export default function Home({ results }) {
@@ -14,6 +16,7 @@ export default function Home({ results }) {
   //     setMovies(results);
   //   })();
   // }, []);
+  const router = useRouter();
 
   return (
     <div>
@@ -21,14 +24,26 @@ export default function Home({ results }) {
       {/* {!results.length && <h4>Loading...</h4>} */}
       <div className="grid grid-cols-2">
         {results?.map((movie) => (
-          <div key={movie.id} className="p-5">
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              className="rounded-lg hover:scale-105"
-              alt="img"
-            />
-            <h4 className="font-medium pt-3">{movie.original_title}</h4>
-          </div>
+          <Link
+            key={movie.id}
+            href={{
+              pathname: `/movies/${movie.original_title}/${movie.id}`,
+              query: {
+                title: movie.original_title,
+                id: movie.id,
+              },
+            }}
+            // as={`/movies/${movie.id}`}
+          >
+            <div key={movie.id} className="p-5">
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                className="rounded-lg hover:scale-105"
+                alt="img"
+              />
+              <h4 className="font-medium pt-3">{movie.original_title}</h4>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
